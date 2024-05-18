@@ -1,0 +1,64 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.wrapper > a {
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+img {
+  width: 80px;
+  height: auto;
+  left: 0;
+}
+
+form {
+  width: 350px;
+  height: 70%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 0 0 10px 0 rgb(168, 168, 168);
+  padding: 30px;
+  border-radius: 12px;
+}
+
+input[type="submit"] {
+  width: 100%;
+}
+
+.error {
+  font-size: 13px;
+}
+
+.password {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button > img {
+  width: 18px;
+  height: auto;
+}
+
+p {
+  padding: 8px;
+  background-color: aliceblue;
+  margin: 0;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Time Quiz</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="icon.png" />
+    <link rel="stylesheet" href="/form/assets/css/form.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <a href="/"
+        ><img
+          src="icon.png"
+          alt=""
+          style="margin-right: 12px"
+        />Let's QUIZZ</a
+      >
+      <form action="/register" method="post">
+        <h1>Register</h1>  
+        <div class="mb-3 form-group">
+          <input
+            autofocus
+            required
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Name"
+            <% if (data && data.name !== "") { %>
+              value="<%= data.name %>"
+            <% } %>
+          />
+          <% if (errors) { %>
+            <% errors.forEach(function(error) { %>
+              <% if (error.path === "name") { %>
+                  <p class="error text-danger"><%= error.msg %></p>
+              <% } %>
+            <% }) %>
+          <% } %>
+        </div>
+        <div class="mb-3 form-group">
+          <input
+            required
+            type="email"
+            class="form-control"
+            id="mail"
+            name="mail"
+            aria-describedby="emailHelp"
+            placeholder="Email"
+            <% if (data && data.mail !== "") { %>
+              value="<%= data.mail %>"
+            <% } %>
+          />
+          <% if (errors) { %>
+            <% errors.forEach(function(error) { %>
+              <% if (error.path === "mail") { %>
+                <p class="error text-danger"><%= error.msg %></p>
+              <% } %>
+            <% }) %>
+          <% } %>
+        </div>
+        <div class="mb-3 form-group">
+          <div class="password">
+            <input
+              required
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Password"
+            />
+            <button type="button" class="btn pw-visibility"><img src="/form/assets/images/hidepw.png" alt=""></button>
+          </div>
+          <% if (errors) { %>
+            <% errors.forEach(function(error) { %>
+              <% if (error.path === "password") { %>
+                <p class="error text-danger"><%= error.msg %></p>
+              <% } %>
+            <% }) %>
+          <% } %>
+        </div>
+        <div class="mb-3 form-group">
+          <div class="password">
+            <input
+              onpaste="return false"
+              ondrop="return false"
+              required
+              type="password"
+              class="form-control"
+              id="confirm-password"
+              name="confirm_password"
+              placeholder="Confirm password"
+            />
+            <button type="button" class="btn confirm-pw-visibility"><img src="/form/assets/images/hidepw.png" alt=""></button>
+          </div>
+          <% if (errors) { %>
+            <% errors.forEach(function(error) { %>
+              <% if (error.path === "confirm_password") { %>
+                <p class="error text-danger"><%= error.msg %></p>
+              <% } %>
+            <% }) %>
+          <% } %>
+        </div>
+        <input
+          type="submit"
+          class="btn btn-primary"
+          name="register"
+          value="Register"
+        />
+      </form>
+      <div>Already has an account? <a href="/login">Sign in</a></div>
+    </div>
+    <script src="/form/assets/js/form.js"></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+.wrapper-child > * {
+  margin-top: 70px;
+}
+
+.chart {
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding-top: 70px;
+}
+
+.answer-wrapper > *:not(h4) {
+  width: 90%;
+  margin: 10px 0;
+  height: 60px;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+}
+
+.answer-wrapper {
+  box-shadow: 0 5px 10px 0 rgb(168, 168, 168);
+  border-radius: 10px;
+  margin: 50px 0 100px 0;
+  background-color: white;
+  padding: 20px 25px;
+  width: 45%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .answer-wrapper {
+    width: 300px;
+  }
+}

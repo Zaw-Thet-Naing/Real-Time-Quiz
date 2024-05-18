@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Time Quiz</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="/icon.png" />
+    <link rel="stylesheet" href="/dashboard.css" />
+    <link rel="stylesheet" href="/presenter/css/activity.css" />
+    <script
+      src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+      integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="/" title="Home"><img src="/icon.png" alt="" /></a>
+      <a href="/presenter/history" title="History"
+        ><img src="/presenter/images/history.png" alt=""
+      /></a>
+      <a href="/presenter/activity" title="Current Activity"
+        ><img src="/presenter/images/activity.png" alt=""
+      /></a>
+      <a href="/profile" title="Profile"
+        ><img src="/presenter/images/profile.png" alt=""
+      /></a>
+    </nav>
+    <div class="wrapper">
+      <% if (id) { %>
+      <button class="btn btn-primary present-poll">
+        <img src="/presenter/images/present.png" alt="" /> Present the Poll
+      </button>
+      <div class="chart" id="<%= id %>">
+        <div class="info-container">
+          <h6>
+            Participate via -
+            <strong> localhost:3000/participant/participate/ </strong>
+          </h6>
+          <h6 class="text-info url font-weight-bold"><%= url %></h6>
+        </div>
+        <h3 id="total">Total Participants - 0</h3>
+        <div class="chart-wrapper">
+          <canvas></canvas>
+        </div>
+        <button class="btn btn-danger end-poll">End Poll</button>
+      </div>
+      <% } else { %>
+      <h1>No current activity</h1>
+      <button class="btn btn-primary add-activity">Add New Activity +</button>
+      <% } %>
+      <div class="chart-form">
+        <div class="cancel">
+          <img src="/presenter/images/cancel.png" alt="" srcset="" />
+        </div>
+        <form action="" method="post">
+          <div class="mb-3 form-group">
+            <label for="question" class="form-label">Question</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="question"
+              name="question"
+              placeholder="Question"
+            />
+          </div>
+          <div class="mb-3 form-group answers">
+            <label class="form-label">Answers</label>
+            <div class="answer">
+              <button
+                class="radio-container btn"
+                title="Mark as Correct Answer"
+              >
+                <input
+                  required
+                  class="mark-correct-answer"
+                  type="radio"
+                  name="is_answer"
+                  id=""
+                />
+              </button>
+              <input
+                required
+                type="text"
+                class="form-control answer-input"
+                name="answers[]"
+                placeholder="Answer"
+              />
+            </div>
+            <div class="answer">
+              <button
+                class="radio-container btn"
+                title="Mark as Correct Answer"
+              >
+                <input
+                  class="mark-correct-answer"
+                  type="radio"
+                  name="is_answer"
+                  id=""
+                />
+              </button>
+              <input
+                required
+                type="text"
+                class="form-control answer-input"
+                name="answers[]"
+                placeholder="Answer"
+              />
+            </div>
+          </div>
+          <div class="mb-3 form-group">
+            <button type="button" class="btn add-answers">
+              Add More Answers +
+            </button>
+          </div>
+          <input type="submit" class="btn btn-primary" name="start" />
+        </form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="/dashboard.js"></script>
+    <script src="/presenter/js/activity.js"></script>
+  </body>
+</html>

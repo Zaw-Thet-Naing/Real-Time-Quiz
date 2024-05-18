@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Time Quiz</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="/icon.png" />
+    <link rel="stylesheet" href="/dashboard.css" />
+    <link rel="stylesheet" href="/presenter/css/history.css" />
+    <script
+      src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+      integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="/" title="Home"><img src="/icon.png" alt="" /></a>
+      <a href="/presenter/history" title="History"
+        ><img src="/presenter/images/history.png" alt=""
+      /></a>
+      <a href="/presenter/activity" title="Current Activity"
+        ><img src="/presenter/images/activity.png" alt=""
+      /></a>
+      <a href="/profile" title="Profile"
+        ><img src="/presenter/images/profile.png" alt=""
+      /></a>
+    </nav>
+
+    <div class="wrapper">
+      <div class="wrapper-child">
+        <div class="info-container">
+          <h3>Your activity URL is on -</h3>
+          <h3 class="text-info font-weight-bold"><%= url %></h3>
+        </div>
+        <button class="btn btn-primary add-activity">Add New Activity +</button>
+        <table class="table table-hover table-striped table-responsive-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th class="align-middle" scope="col">
+                <img src="/presenter/images/history.png" alt="" />
+              </th>
+              <th class="align-middle" scope="col">Qestion</th>
+              <th class="align-middle" scope="col">Answer</th>
+              <th class="align-middle" scope="col">Total participants</th>
+              <th class="align-middle" scope="col">Created time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (rows && rows.length > 0) { %>
+              <% rows.forEach(row => { %>
+                <tr>
+                  <th scope="row"><%= row.id %></th>
+                  <td><%= row.question %></td>
+                  <td><%= row.answer %></td>
+                  <td><%= row.total_participants %></td>
+                  <td><%= row.created_date %></td>
+                </tr>
+              <% }); %>
+            <% } else { %>
+              <tr><td colspan="5"><h4>You haven't created any activity yet</h4></td></tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class="chart">
+        <h4 class="cancel-chart-view">X</h4>
+        <h2></h2>
+        <div class="chart-wrapper">
+          <canvas></canvas>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary btn-start">
+            Start Activity
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-toggle="modal"
+            data-target="#confirm-delete-poll"
+          >
+            Delete Activity
+          </button>
+        </div>
+      </div>
+      <div class="chart-form">
+        <div class="cancel">
+          <img src="/presenter/images/cancel.png" alt="" srcset="" />
+        </div>
+        <form action="" method="post">
+          <div class="mb-3 form-group">
+            <label for="question" class="form-label">Question</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="question"
+              name="question"
+              placeholder="Question"
+            />
+          </div>
+          <div class="mb-3 form-group answers">
+            <label class="form-label">Answers</label>
+            <div class="answer">
+              <button
+                class="radio-container btn"
+                title="Mark as Correct Answer"
+              >
+                <input
+                  required
+                  class="mark-correct-answer"
+                  type="radio"
+                  name="is_answer"
+                  id=""
+                />
+              </button>
+              <input
+                required
+                type="text"
+                class="form-control answer-input"
+                name="answers[]"
+                placeholder="Answer"
+              />
+            </div>
+            <div class="answer">
+              <button
+                class="radio-container btn"
+                title="Mark as Correct Answer"
+              >
+                <input
+                  class="mark-correct-answer"
+                  type="radio"
+                  name="is_answer"
+                  id=""
+                />
+              </button>
+              <input
+                required
+                type="text"
+                class="form-control answer-input"
+                name="answers[]"
+                placeholder="Answer"
+              />
+            </div>
+          </div>
+          <div class="mb-3 form-group">
+            <button type="button" class="btn add-answers">
+              Add More Answers +
+            </button>
+          </div>
+          <input type="submit" class="btn btn-primary" name="start" />
+        </form>
+      </div>
+      <div
+        class="modal fade"
+        id="confirm-delete-poll"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="Confirm about starting poll"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Confirm delete</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you that you want to delete this poll?
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-danger btn-delete">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="/presenter/js/history.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Time Quiz</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="/icon.png" />
+    <link rel="stylesheet" href="/dashboard.css" />
+    <link rel="stylesheet" href="/presenter/css/history.css" />
+    <link rel="stylesheet" href="/participant/css/history.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="/" title="Home"><img src="/icon.png" alt="" /></a>
+      <a href="/participant/participate" title="Participate"
+        ><img src="/participant/images/participate.png" alt=""
+      /></a>
+      <a href="/participant/history" title="History"
+        ><img src="/participant/images/history.png" alt=""
+      /></a>
+      <a href="/profile" title="Profile"
+        ><img src="/participant/images/profile.png" alt=""
+      /></a>
+    </nav>
+    <div class="wrapper">
+      <div class="wrapper-child">
+        <h1>Your Previous Engagements</h1>
+        <table class="table table-hover table-striped table-responsive-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th class="align-middle" scope="col">Poll ID</th>
+              <th class="align-middle" scope="col">Poll Qestion</th>
+              <th class="align-middle" scope="col">Taken Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (result && result.length > 0) { %> 
+              <% result.forEach(row => { %>
+                <tr>
+                  <th scope="row"><%= row.id %></th>
+                  <td><%= row.question %></td>
+                  <td><%= row.date %></td>
+                  <td style="display: none;"><%= row.chosen_answer_id %></td>
+                </tr>
+              <% }); %> 
+            <% } else { %>
+                <tr>
+                  <td colspan="3"><h4>You haven't partcipated yet or presenter deleted it</h4></td>
+                </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class="chart">
+        <h4 class="cancel-chart-view">X</h4>
+        <h2></h2>
+        <div class="chart-wrapper">
+          <canvas></canvas>
+        </div>
+        <div class="answer-wrapper">
+          <h4>Your chosen answer in this poll</h4>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="/participant/js/history.js"></script>
+  </body>
+</html>
