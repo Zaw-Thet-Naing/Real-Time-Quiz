@@ -50,7 +50,7 @@ p {
 
 .images, .info {
   margin-top: 50px;
-  padding: 20px;
+  padding: 10px;
   justify-content: space-evenly;
   display: flex;
   flex-direction: row;

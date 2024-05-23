@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", () => {
         if (input.type === "text") {
           input.type = "password";
-          eye_icon.src = "/form/hidepw.png";
+          eye_icon.src = "/form/assets/hidepw.png";
         } else {
           input.type = "text";
-          eye_icon.src = "/form/showpw.png";
+          eye_icon.src = "/form/assets/showpw.png";
         }
       });
     }
