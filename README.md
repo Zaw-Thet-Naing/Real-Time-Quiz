@@ -6,7 +6,7 @@
 
 #### Description:
 
-This [Express](https://expressjs.com/) website is designed to empower the increase in the in-class engagement for activities such as taking quizzes.
+This [Express](https://expressjs.com/) website is designed to empower engagement between students and teachers for activities such as taking quizzes whether in-class or remotely.
 
 #### How to install and run
 
