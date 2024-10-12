@@ -2,7 +2,7 @@
 
 #### Description:
 
-This project is built with [Express.js](https://expressjs.com/) and is designed to empower engagement between students and teachers for activities such as taking quizzes whether in-class or remotely.
+I created this program because I have been noticing some of my classmates hesitate to answer questions in class due to shyness. So, I designed this program with [Express.js](https://expressjs.com/) to empower engagement between students and teachers for taking quizzes whether it is done in-class or remotely.
 
 #### How to install and run
 
